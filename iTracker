@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Liquid Golden Gate Tracker</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #1a0f00, #3d1e03, #111116);
+            --liquid-amber: linear-gradient(180deg, rgba(255, 145, 0, 0.25) 0%, rgba(217, 4, 41, 0.1) 100%);
+            --glass-core: rgba(255, 230, 200, 0.05);
+            --border-golden: linear-gradient(135deg, rgba(255, 193, 7, 0.4), rgba(217, 4, 41, 0.1), rgba(255, 255, 255, 0.2));
+            --text-gold: #ffb703;
+            --text-light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-gradient);
+            padding: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.2) 0%, transparent 70%);
+            top: 20%;
+            left: 10%;
+            animation: liquidMove 10s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes liquidMove {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 30px) scale(1.2); }
+        }
+
+        .tracker-card {
+            background: var(--glass-core);
+            background-image: var(--liquid-amber);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 30px;
+            padding: 25px;
+            width: 100%;
+            max-width: 360px;
+            color: var(--text-light);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .tracker-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 30px;
+            padding: 1px;
+            background: var(--border-golden);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            -webkit-mask-composite: exclude;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        h2 {
+            font-size: 21px;
+            text-align: center;
+            margin-bottom: 3px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #ffffff, #ffe169);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 10px;
+            text-align: center;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-gold);
+            margin-bottom: 22px;
+        }
+
+        .search-box {
+            display: flex;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 4px 4px 4px 16px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 183, 3, 0.2);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .search-box input {
+            background: none;
+            border: none;
+            outline: none;
+            color: var(--text-light);
+            font-size: 15px;
+            width: 100%;
+        }
+
+        .search-box input::placeholder { color: rgba(255,255,255,0.3); }
+
+        .search-box button {
+            background: linear-gradient(135deg, #ffb703, #fb8500);
+            border: none;
+            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(251, 133, 0, 0.3);
+            transition: all 0.2s;
+        }
+
+        .search-box button:hover { transform: scale(1.05); opacity: 0.9; }
+
+        .result-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .product-name {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 0.3px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 15px;
+            align-self: center;
+        }
+
+        .st-predictive { background: rgba(255, 183, 3, 0.15); color: #ffb703; border: 1px solid rgba(255, 183, 3, 0.4); }
+        .st-rumor { background: rgba(251, 133, 0, 0.15); color: #fb8500; border: 1px solid rgba(251, 133, 0, 0.4); }
+        .st-released { background: rgba(52, 199, 89, 0.15); color: #34c759; border: 1px solid rgba(52, 199, 89, 0.4); }
+        .st-cancelled { background: rgba(217, 4, 41, 0.15); color: #d90429; border: 1px solid rgba(217, 4, 41, 0.4); }
+        .st-invalid { background: rgba(217, 4, 41, 0.15); color: #ff3b30; border: 1px solid rgba(217, 4, 41, 0.4); }
+
+        .date-display {
+            font-size: 25px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(180deg, #ffffff, #e5e5e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .source-box {
+            font-size: 12px;
+            opacity: 0.8;
+            border-top: 1px solid rgba(255, 183, 3, 0.15);
+            padding-top: 12px;
+            margin-top: 10px;
+            line-height: 1.45;
+            text-align: left;
+        }
+
+        .source-title {
+            font-weight: 700;
+            font-size: 9px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 5px;
+            text-align: center;
+            color: var(--text-gold);
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tracker-card">
+        <h2>Apple Engine Intel</h2>
+        <div class="subtitle">Predictive Matrix v3.0</div>
+        
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Scrivi es. iPhone 19, Ultra 4, Ring...">
+            <button id="search-btn">🔍</button>
+        </div>
+
+        <div class="result-box" id="result-container">
+            <div id="initial-message" style="opacity: 0.6; font-size: 13px;">Inserisci un hardware o chip per calcolare la proiezione temporale basata sulle metriche storiche dei cicli di produzione.</div>
+        </div>
+    </div>
+
+    <script>
+        const historicalDatabase = [
+            { keywords: ['iphone 2g', 'iphone 1g', 'primo iphone'], name: "iPhone (Originale)", status: "st-released", text: "Prodotto Storico", date: "Giugno 2007", desc: "Il primo iconico modello di iPhone presentato da Steve Jobs. Fu commercializzato inizialmente negli Stati Uniti." },
+            { keywords: ['imac m4'], name: "iMac M4", status: "st-released", text: "Già Disponibile", date: "Ottobre 2024", desc: "Rilasciato ufficialmente a fine 2024 con display Retina 4.5K, chip M4 e configurazione base aggiornata a 16GB di memoria unificata." },
+            { keywords: ['ipad air 11 m2', 'ipad air 13 m2', 'ipad air m2'], name: "iPad Air M2", status: "st-released", text: "Già Disponibile", date: "Maggio 2024", desc: "Disponibile nei formati da 11 e 13 pollici, equipaggiato con processore Apple M2 e fotocamera frontale orizzontale." },
+            { keywords: ['ipad pro m4'], name: "iPad Pro M4", status: "st-released", text: "Già Disponibile", date: "Maggio 2024", desc: "Il tablet più sottile di sempre, caratterizzato dallo schermo Ultra Retina XDR (Tandem OLED) e dal debutto del chip M4." },
+            { keywords: ['ipad 10', 'ipad 2022'], name: "iPad (10ª gen)", status: "st-released", text: "Già Disponibile", date: "Ottobre 2022", desc: "Modello base entry-level con chip A14 Bionic, porta USB-C e design a tutto schermo." },
+            { keywords: ['ipad mini 7', 'ipad mini a17'], name: "iPad mini (A17 Pro)", status: "st-released", text: "Già Disponibile", date: "Ottobre 2024", desc: "Aggiornamento compatto che introduce il supporto ad Apple Intelligence e la compatibilità con Apple Pencil Pro." },
+            { keywords: ['iphone se 4', 'se4', 'se 2025'], name: "iPhone SE 4", status: "st-released", text: "Già Rilasciato", date: "Primavera 2025", desc: "Modello economico aggiornato con pannello OLED derivato da iPhone 14, supporto Apple Intelligence e modem 5G custom." },
+            { keywords: ['iphone 16'], name: "iPhone 16 Series", status: "st-released", text: "Già Disponibile", date: "Settembre 2024", desc: "Gamma dotata di tasto Controllo Fotocamera, chip A18/A18 Pro e ottimizzazione hardware per Apple Intelligence." },
+            { keywords: ['iphone 17'], name: "iPhone 17 Series", status: "st-released", text: "Già Disponibile", date: "Settembre 2025", desc: "Introdotta la tecnologia ProMotion a 120Hz sull'intera linea e la variante Slim/Air ultrasottile." },
+            { keywords: ['car', 'titan', 'auto'], name: "Apple Car (Project Titan)", status: "st-cancelled", text: "Progetto Abbandonato", date: "Nessuna / Archiviato", desc: "Il progetto automobilistico autonomo è stato definitivamente cancellato all'inizio del 2024. I team sono stati ricollocati sulla divisione AI." }
+        ];
+
+        const appleKeywords = ['iphone', 'ipad', 'mac', 'watch', 'airpods', 'tv', 'vision', 'display', 'studio', 'pro', 'ultra', 'mini', 'ring', 'glass', 'chip', 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'os', 'homepod', 'pencil', 'imac', 'book'];
+
+        const searchInput = document.getElementById('search-input');
+        const searchBtn = document.getElementById('search-btn');
+        const container = document.getElementById('result-container');
+
+        function processIntelligence() {
+            const rawQuery = searchInput.value.trim();
+            const query = rawQuery.toLowerCase();
+            if (!query) return;
+
+            // 1. Controllo nel database dei prodotti reali archiviati o confermati
+            const exactMatch = historicalDatabase.find(item => 
+                item.keywords.some(k => query.includes(k) || k.includes(query))
+            );
+
+            if (exactMatch) {
+                renderUI(exactMatch.name, exactMatch.status, exactMatch.text, exactMatch.date, exactMatch.desc);
+                return;
+            }
+
+            // 2. Controllo di pertinenza del brand
+            const isAppleRelated = appleKeywords.some(keyword => query.includes(keyword));
+            if (!isAppleRelated) {
+                renderUI(rawQuery, "st-invalid", "Input Non Valido", "Nessun Riscontro", "La stringa inserita non appartiene all'ecosistema di dispositivi o componenti Apple conosciuti.");
+                return;
+            }
+
+            // 3. Gestione eccezioni specifiche per anomalie chip storici su iPad
+            if (query.includes('ipad') && (query.includes('a16') || query.includes('a15') || query.includes('a14') || query.includes('a13'))) {
+                renderUI("iPad (Chip Serie A Passati)", "st-released", "Già Rilasciato", "Modelli Esistenti", "I chip delle generazioni A14 Bionic (iPad 10) o A15/A16 sono già stati integrati nelle linee di tablet passate. Apple ha già spostato i modelli superiori e medi sulle architetture M-Series o chip A17 Pro / A18.");
+                return;
+            }
+
+            // 4. Motore Algoritmico per generazioni future
+            let predictedName = rawQuery.charAt(0).toUpperCase() + rawQuery.slice(1);
+            let estimatedDate = "In fase di sviluppo";
+            let logicDetail = "Analisi basata sui cicli di rilascio industriali.";
+
+            const numberMatch = query.match(/\d+/);
+            if (numberMatch) {
+                const num = parseInt(numberMatch[0]);
+                
+                if (query.includes('iphone')) {
+                    predictedName = `iPhone ${num} Series`;
+                    if (num <= 15) {
+                        renderUI(predictedName, "st-released", "Già Rilasciato", "Passato", `Questo modello appartiene alle passate generazioni di smartphone Apple commercializzate prima del 2024.`);
+                        return;
+                    }
+                    let yearGap = num - 16;
+                    let targetYear = 2024 + yearGap;
+                    estimatedDate = `Settembre ${targetYear}`;
+                    logicDetail = `Frequenza annuale standard confermata. La pipeline di sviluppo dei SoC a 2nm e successivi segue questa precisa scansione autunnale.`;
+                } 
+                else if (query.includes('watch') || query.includes('ultra')) {
+                    const isUltra = query.includes('ultra');
+                    predictedName = isUltra ? `Apple Watch Ultra ${num}` : `Apple Watch Series ${num}`;
+                    
+                    if ((isUltra && num <= 2) || (!isUltra && num <= 10)) {
+                        renderUI(predictedName, "st-released", "Già Rilasciato", "Passato", `Orologio smart di generazione precedente, già presente sul mercato.`);
+                        return;
+                    }
+                    
+                    let yearGap = isUltra ? (num - 2) : (num - 10);
+                    let targetYear = 2024 + yearGap;
+                    estimatedDate = `Settembre ${targetYear}`;
+                    logicDetail = `Sincronizzazione di linea con il comparto smartphone e aggiornamenti stabili dei sensori biometrici.`;
+                }
+                else if (query.includes('m') || query.includes('mac') || query.includes('ipad')) {
+                    if (query.includes('m')) {
+                        predictedName = `Dispositivo con Chip M${num}`;
+                        if (num <= 3) {
+                            renderUI(predictedName, "st-released", "Già Rilasciato", "Passato", `L'architettura Apple Silicon M${num} è già stata completata e distribuita su tutta la linea Mac e iPad negli anni scorsi.`);
+                            return;
+                        }
+                        let targetYear = 2024 + Math.round((num - 4) * 1.5);
+                        estimatedDate = `Finestra ${targetYear}`;
+                        logicDetail = `Proiezione basata sull'evoluzione dei semiconduttori TSMC a cadenza di circa 14-18 mesi per architettura hardware.`;
+                    }
+                }
+            } else {
+                if (query.includes('ring') || query.includes('anello')) {
+                    predictedName = "Apple Ring";
+                    estimatedDate = "Pianificazione Libera (2027+)";
+                    logicDetail = "Studiato internamente tramite brevetti depositati sulla gestione delle interfacce gesture. La produzione di massa non è ancora stata allocata.";
+                } else if (query.includes('glass') || query.includes('occhiali')) {
+                    predictedName = "Apple AR Glasses";
+                    estimatedDate = "Oltre il 2027";
+                    logicDetail = "Lo sviluppo dei veri occhiali per realtà aumentata standalone richiede un drastico abbattimento dei consumi energetici e del peso termico.";
+                }
+            }
+
+            renderUI(predictedName, "st-predictive", "Calcolo Predittivo", estimatedDate, logicDetail);
+        }
+
+        function renderUI(name, statusClass, statusText, date, description) {
+            container.innerHTML = `
+                <div class="product-name">${name}</div>
+                <div class="status-badge ${statusClass}">${statusText}</div>
+                <div class="date-display">${date}</div>
+                <div class="source-box">
+                    <div class="source-title">Matrice Storica & Logica di Uscita</div>
+                    <div>${description}</div>
+                </div>
+            `;
+        }
+
+        searchBtn.addEventListener('click', processIntelligence);
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') processIntelligence();
+        });
+    </script>
+</body>
+</html>
