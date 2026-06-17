@@ -1,5 +1,3 @@
-
-1.909
 # iTracker
 
 Current version: v1.0.0
