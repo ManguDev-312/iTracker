@@ -1,47 +1,20 @@
-# iTracker
+iTracker
+iTracker is a powerful tracking tool designed to predict any verified Apple release. Thanks to an extremely aesthetic, modern, and intuitive design, it offers unparalleled versatility, so much so that it can literally be run and operated even within plain text applications like Windows Notes or macOS TextEdit.
 
-Current version: v1.0.0
-An exclusively Italian project
+Main Features
+Accurate and verified prediction of all upcoming Apple releases.
 
-## Description
-iTracker is an advanced tool for managing and tracking activities, designed to offer an elegant and seamless user experience.
+Modern, aesthetic, and highly intuitive user interface.
 
-It was conceived as a premium product, developed with the utmost care, designed for those who want a modern interface, combined with Apple's iOS 27 Golden Gate.
+Maximum versatility: runs anywhere, even within text editors like Windows Notes and macOS TextEdit.
 
-The entire project is built using a hybrid of proprietary CrystalSoft™ technology and a simplified Golden Gate design, achieving a new aesthetic standard for lightweight, standalone applications.
+Technologies Used
+This project was developed using:
 
-## Key Features
-- Exclusive interface based on **CrystalSoft™**
-- Refined and consistent design in every detail
-- High performance even on older devices
-- Clean, readable, and easily extendable code
-- Smooth and intuitive user experience
+HTML
 
-## CrystalSoft™
-CrystalSoft™ is a proprietary design system developed to give projects a unique visual identity.
+How to Contribute
+The project is open to the community! If you have ideas for improving predictions, enhancing versatility, or making the tracker even more powerful, your contributions are welcome. You can contribute by opening a Pull Request or reporting suggestions and bugs in the Issues section.
 
-This special edition of CrystalSoft features:
-- warm, luminous hues
-- golden highlights and subtle gradients
-- semi-transparent panels with controlled depth
-- smooth animations and elegant micro-interactions
-
-The result is a premium, recognizable interface.
-
-## Project Vision
-iTracker is more than just a tool: it is the first step towards a line of refined and coherent applications, designed to offer a superior experience.
-
-The project was born in Italy in 2026 and embodies the desire to create independent, refined, and accessible software.
-
-An international English-language version is planned for the future.
-
-## Versions
-
-### v1.0.0 – First Version
-- Initial Release
-- CrystalSoft™ Interface
-- Basic Tracking Features
-
-## License
-Distributed under the MIT License.
-For more details, see the LICENSE file.
+License
+This project is licensed under the MIT License. You are free to use, modify and distribute it.
