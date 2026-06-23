@@ -21,5 +21,6 @@ How to Contribute:
 
 The project is open to the community! If you have ideas for improving predictions, enhancing versatility, or making the tracker even more powerful, your contributions are welcome. You can contribute by opening a Pull Request or reporting suggestions and bugs in the Issues section.
 
-License
+License:
+
 This project is licensed under the AGPL v3.0 License. Any modification or use over a network must be released under the same license.
